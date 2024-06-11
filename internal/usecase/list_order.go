@@ -13,7 +13,7 @@ func NewListOrderUseCase(OrderRepository entity.OrderRepositoryInterface) *ListO
     return &ListOrderUseCase{OrderRepository: OrderRepository}
 }
 
-func (c *ListOrderUseCase) List() ([]dto.OrderOutputDTO, error) {
+func (c *ListOrderUseCase) Execute() ([]dto.OrderOutputDTO, error) {
     var OrdersOutput []dto.OrderOutputDTO
 
     Orders, err := c.OrderRepository.List()
