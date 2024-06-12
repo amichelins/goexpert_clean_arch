@@ -17,7 +17,7 @@ func NewOrderService(listOrderUseCase usecase.ListOrderUseCase) *OrderService {
 }
 
 func (s *OrderService) ListOrders(context.Context, *pb.Blank) (*pb.OrderList, error) {
-    LisOrder, err := s.ListOrderUseCase.OrderRepository.List()
+    LisOrder, err := s.ListOrderUseCase.Execute()
 
     if err != nil {
         return nil, err
@@ -25,7 +25,7 @@ func (s *OrderService) ListOrders(context.Context, *pb.Blank) (*pb.OrderList, er
 
     PbOrderList := pb.OrderList{}
 
-    for _, Order := range *LisOrder {
+    for _, Order := range LisOrder {
         PbOrderList.Orders = append(PbOrderList.Orders, &pb.OrderResponse{Id: Order.ID, Price: float32(Order.Price), Tax: float32(Order.Tax), FinalPrice: float32(Order.FinalPrice)})
     }
 
